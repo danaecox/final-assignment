@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jack</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: white;
+      font-family: 'Bungee', sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
+
+    .line {
+      color: #111;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+    }
+
+    .line1 {
+      font-size: 3.5rem;
+      animation: typing1 1.2s steps(20, end) forwards;
+    }
+
+    .line2 {
+      font-size: 1.8rem;
+      margin-top: 15px;
+      animation: typing2 1.2s steps(30, end) forwards;
+      animation-delay: 1.25s;
+    }
+
+    .line3 {
+      font-size: 1.8rem;
+      margin-top: 8px;
+      animation: typing3 1.4s steps(40, end) forwards;
+      animation-delay: 2.5s;
+    }
+
+    @keyframes typing1 {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes typing2 {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes typing3 {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    a {
+      color: #111;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    a:hover {
+      color: blue;
+    }
+
+    .back {
+      margin-top: 35px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: #111;
+      opacity: 0.8;
+    }
+
+    .back:hover {
+      color: blue;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="jack.jpg" alt="Jack">
+
+  <div class="line line1">JACK, 20</div>
+
+  <div class="line line2">CAUSE OF HEARTBREAK:</div>
+
+  <div class="line line3">
+    <a href="situationship.html">SITUATIONSHIP</a>
+  </div>
+
+  <a class="back" href="page2.html">← Back</a>
+
+</body>
+</html>
