@@ -19,7 +19,7 @@
       background-color: white;
       font-family: 'Bungee', sans-serif;
       text-align: center;
-      padding-top: 40px;
+      padding-top: 50px;
     }
 
     img {
@@ -27,34 +27,35 @@
       height: 200px;
       object-fit: cover;
       border-radius: 12px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .line {
-      font-size: 3.5rem;
       color: #111;
       white-space: nowrap;
       overflow: hidden;
       width: 0;
     }
 
-    /* ARI, 28 */
+    /* 🔥 BIG NAME LINE */
     .line1 {
-      animation: typing1 1.6s steps(20, end) forwards;
+      font-size: 3.5rem;
+      animation: typing1 1.2s steps(20, end) forwards;
     }
 
-    /* CAUSE OF HEARTBREAK */
+    /* normal text */
     .line2 {
-      margin-top: 20px;
-      animation: typing2 1.6s steps(30, end) forwards;
-      animation-delay: 1.8s; /* short pause */
+      font-size: 1.8rem;
+      margin-top: 15px;
+      animation: typing2 1.2s steps(30, end) forwards;
+      animation-delay: 1.25s;
     }
 
-    /* DADDY ISSUES */
     .line3 {
-      margin-top: 10px;
-      animation: typing3 1.8s steps(40, end) forwards;
-      animation-delay: 3.6s; /* shorter second pause */
+      font-size: 1.8rem;
+      margin-top: 8px;
+      animation: typing3 1.4s steps(40, end) forwards;
+      animation-delay: 2.5s;
     }
 
     @keyframes typing1 {
@@ -83,8 +84,8 @@
     }
 
     .back {
-      margin-top: 40px;
-      font-size: 0.9rem;
+      margin-top: 35px;
+      font-size: 0.85rem;
       text-decoration: none;
       color: #111;
       opacity: 0.8;
@@ -101,13 +102,10 @@
 
   <img src="ari.jpg" alt="Ari">
 
-  <!-- Line 1 -->
   <div class="line line1">ARI, 28</div>
 
-  <!-- Line 2 -->
   <div class="line line2">CAUSE OF HEARTBREAK:</div>
 
-  <!-- Line 3 (clickable) -->
   <div class="line line3">
     <a href="daddy-issues.html">DADDY ISSUES</a>
   </div>
