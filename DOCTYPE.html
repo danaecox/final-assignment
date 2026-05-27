@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page 2</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #text {
+      width: 65%;
+      max-width: 800px;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: 1.8;
+      color: #111;
+      white-space: pre-wrap;
+    }
+
+    a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    a:hover {
+      color: #ff0088;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="text"></div>
+
+  <script>
+    const paragraph = `It's something close to 11 in the morning on a Tuesday. It's sunny and it doesn't matter what time of year it is. The number 19 tram is slowly passing through the outskirting suburbs of the CBD. You have somewhere to be, but it's not urgent.
+
+You're alone in a four seater by the doors. The tram is scarcely populated, maybe half a dozen passengers total. Among these passengers are three sad boys, each draped hopelessly around the furniture of the tram.
+
+You have nothing to do but watch them.`;
+
+    const textElement = document.getElementById("text");
+
+    let index = 0;
+    let currentText = "";
+
+    function typeText() {
+      if (index < paragraph.length) {
+
+        currentText += paragraph[index];
+
+        const linkedText = currentText.replace(
+          "sad boys",
+          '<a href="page2.html">sad boys</a>'
+        );
+
+        textElement.innerHTML = linkedText;
+
+        index++;
+        setTimeout(typeText, 35);
+      }
+    }
+
+    typeText();
+  </script>
+
+</body>
+</html>
