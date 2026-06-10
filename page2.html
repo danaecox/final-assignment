@@ -6,7 +6,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -16,6 +16,34 @@
       justify-content: space-evenly;
       align-items: center;
       background-color: white;
+      position: relative;
+    }
+
+    /* Intro text box */
+    #intro-box {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 65%;
+      max-width: 900px;
+
+      padding: 12px 18px;
+
+      text-align: center;
+
+      font-family: "Crimson Text", serif;
+      font-size: 22px;
+      line-height: 1.5;
+
+      color: #222;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+
+      opacity: 0;
+      transition: opacity 0.25s ease;
+
+      pointer-events: none;
     }
 
     .image-link {
@@ -29,7 +57,7 @@
       height: 150px;
       object-fit: cover;
       border-radius: 12px;
-      transition: 0.2s;
+      transition: transform 0.2s ease;
     }
 
     .image-link img:hover {
@@ -40,20 +68,44 @@
 
 <body>
 
+  <div id="intro-box"></div>
+
   <!-- JACK -->
-  <a href="jack.html" class="image-link">
-   <img src="./photos/jack.jpg.png">
+  <a href="jack.html"
+     class="image-link"
+     onmouseenter="showIntro(`&lt;b&gt;You are a passenger on the number 19 tram.&lt;/b&gt; There's a boy standing with his back to the unused door. He is tall and clean and his shirt is a bit too small and his pants are far too big. His arms and fingers are dotted with tattoos that you recognise as an obvious attempt to counter the baby fat that still clings to his cheekbones. His eyes are narrow and bruised. He looks like he’s trying very hard to be mean. He looks sad.`)"
+     onmouseleave="hideIntro()">
+    <img src="./photos/jack.jpg.png" alt="Jack">
   </a>
 
   <!-- ARI -->
-  <a href="ari.html" class="image-link">
+  <a href="ari.html"
+     class="image-link"
+     onmouseenter="showIntro(`&lt;b&gt;You are a passenger on the number 19 tram.&lt;/b&gt; There is a man sitting by the window in a four seater. His hair is parted neatly down the middle and his office attire is creased and loose. He seems too little for the costume he’s put himself in. The sun shines in pieces through the window, slashing light diagonally across his face. There's something stoic and stilted about the emotion molding his skin. You’re not quite sure how you can tell, but he looks sad.`)"
+     onmouseleave="hideIntro()">
     <img src="./photos/ari.jpeg" alt="Ari">
   </a>
 
   <!-- TYLER -->
-  <a href="tyler.html" class="image-link">
+  <a href="tyler.html"
+     class="image-link"
+     onmouseenter="showIntro(`&lt;b&gt;You are a passenger on the number 19 tram.&lt;/b&gt; There is a man leaning against the back of the tram, his fingernails have a line of dirt underneath them and are tapping rhythmically against the drivers compartment. His face is wrinkled in the way that time can’t cause, the bleeding, fuzzy ink of his tattoos is the only thing that can indicate his age. His body is moving with a motion not caused by the tram, his right foot thumps against the ground to the tune of his tapping, he's hopeless and heavy, he’s sad.`)"
+     onmouseleave="hideIntro()">
     <img src="./photos/tyler.jpeg" alt="Tyler">
   </a>
+
+  <script>
+    const introBox = document.getElementById("intro-box");
+
+    function showIntro(text) {
+      introBox.innerHTML = text;
+      introBox.style.opacity = "1";
+    }
+
+    function hideIntro() {
+      introBox.style.opacity = "0";
+    }
+  </script>
 
 </body>
 </html>

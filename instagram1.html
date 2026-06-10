@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Story</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: white;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* WRAPPER (anchors button only) */
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* PHONE (perfectly centered by body grid) */
+.story {
+  width: 320px;
+  height: 580px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  background: black;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* BACKGROUND */
+.content {
+  position: absolute;
+  inset: 0;
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+}
+
+.top-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+}
+
+/* PROGRESS */
+.progress {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.segment {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.segment-fill {
+  width: 0%;
+  height: 100%;
+  background: white;
+}
+
+/* TOP BAR */
+.top-bar {
+  position: absolute;
+  top: 25px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  z-index: 10;
+  font-weight: 600;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #4ade80;
+  border-radius: 50%;
+}
+
+/* CAPTION */
+.caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 1.2;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* REPLY */
+.reply {
+  position: absolute;
+  bottom: 18px;
+  left: 15px;
+  right: 15px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 999px;
+  padding: 12px 16px;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+}
+
+/* LIKE */
+.like-wrapper {
+  position: absolute;
+  bottom: 22px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.like-btn {
+  font-size: 30px;
+  color: rgba(255,255,255,0.75);
+  transition: transform 0.15s ease, color 0.2s ease;
+}
+
+.like-btn.liked {
+  color: #ff3040;
+  transform: scale(1.2);
+}
+
+/* TAP ZONE */
+.tap-zone {
+  position: absolute;
+  inset: 0;
+}
+
+/* CONTINUE BUTTON (outside, right side) */
+.continue-btn {
+  position: absolute;
+  left: calc(100% + 22px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-family: "Bungee", cursive;
+  font-size: 14px;
+  letter-spacing: 1px;
+
+  background: #111;
+  color: white;
+
+  padding: 14px 18px;
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.continue-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <div class="story">
+
+    <div class="content"></div>
+    <div class="overlay"></div>
+    <div class="top-fade"></div>
+
+    <div class="progress">
+      <div class="segment"><div class="segment-fill"></div></div>
+      <div class="segment"><div class="segment-fill"></div></div>
+      <div class="segment"><div class="segment-fill"></div></div>
+      <div class="segment"><div class="segment-fill"></div></div>
+      <div class="segment"><div class="segment-fill"></div></div>
+      <div class="segment"><div class="segment-fill"></div></div>
+    </div>
+
+    <div class="top-bar">
+      <div class="profile">
+        <span>jack</span>
+        <div class="dot"></div>
+        <span>Close Friends</span>
+      </div>
+      <div style="color:white;">⋯</div>
+    </div>
+
+    <div class="caption" id="caption"></div>
+
+    <div class="reply" onclick="event.stopPropagation()">Send message...</div>
+
+    <div class="like-wrapper" onclick="event.stopPropagation(); toggleLike()">
+      <div class="like-btn">♥</div>
+    </div>
+
+    <div class="tap-zone" onclick="handleTap(event)"></div>
+
+  </div>
+
+  <!-- CONTINUE BUTTON -->
+  <div class="continue-btn" id="continueBtn" onclick="alert('Continue clicked!')">
+    CONTINUE
+  </div>
+
+</div>
+
+<script>
+const stories = [
+  { text: "It's so over bro🤣🤣🤣 who want me???", gradient: "linear-gradient(-45deg,#0f0f0f,#434343)" },
+  { text: "fuck my actual chud life", gradient: "linear-gradient(-45deg,#1d2b64,#f8cdda)" },
+  { text: "all women are the same", gradient: "linear-gradient(-45deg,#ff6a00,#ee0979)" },
+  { text: "I'm sorry no I don't mean that mb", gradient: "linear-gradient(-45deg,#232526,#414345)" },
+  { text: "ignore what I'm saying literally ignore everything I say all the time I'm actually crashing out so hard", gradient: "linear-gradient(-45deg,#3a1c71,#d76d77)" },
+  { text: "never fall in love", gradient: "linear-gradient(-45deg,#000000,#434343)" }
+];
+
+let index = 0;
+let likes = Array(stories.length).fill(false);
+let timer;
+
+const caption = document.getElementById("caption");
+const fills = document.querySelectorAll(".segment-fill");
+const likeBtn = document.querySelector(".like-btn");
+const continueBtn = document.getElementById("continueBtn");
+
+function startAuto() {
+  clearTimeout(timer);
+  timer = setTimeout(next, 3500);
+}
+
+function show(i) {
+  const story = stories[i];
+
+  document.querySelector(".content").style.background = story.gradient;
+
+  caption.style.opacity = 0;
+
+  setTimeout(() => {
+    caption.textContent = story.text;
+    caption.style.opacity = 1;
+  }, 150);
+
+  fills.forEach((f, idx) => {
+    f.style.transition = "none";
+    f.style.width = idx < i ? "100%" : "0%";
+  });
+
+  fills[i].offsetHeight;
+  fills[i].style.transition = "width 3.5s linear";
+  fills[i].style.width = "100%";
+
+  updateLikeUI();
+  updateContinue();
+  startAuto();
+}
+
+function updateContinue() {
+  if (index === stories.length - 1) {
+    continueBtn.classList.add("show");
+  } else {
+    continueBtn.classList.remove("show");
+  }
+}
+
+function handleTap(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+
+  if (x < rect.width / 2) prev();
+  else next();
+}
+
+function next() {
+  if (index < stories.length - 1) {
+    index++;
+    show(index);
+  } else {
+    clearTimeout(timer);
+  }
+}
+
+function prev() {
+  if (index > 0) {
+    index--;
+    show(index);
+  }
+}
+
+function toggleLike() {
+  likes[index] = !likes[index];
+  updateLikeUI();
+}
+
+function updateLikeUI() {
+  likeBtn.classList.toggle("liked", likes[index]);
+}
+
+show(index);
+</script>
+
+</body>
+</html>
