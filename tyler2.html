@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tyler Room 2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Crimson Text", serif;
+  background: white;
+  overflow: hidden;
+}
+
+#wrapper {
+  width: 70%;
+  max-width: 760px;
+}
+
+#text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+/* FINAL STATE */
+.final {
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+.finalLine {
+  font-size: 1.4rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 1.2s ease;
+  margin: 10px 0;
+}
+
+.finalLine.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* BUTTON */
+#nextButton {
+  margin-top: 30px;
+  font-family: "Bungee", sans-serif;
+  font-size: 14px;
+  background: none;
+  border: 1px solid #111;
+  cursor: pointer;
+  padding: 10px 16px;
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+#nextButton:hover {
+  color: #ff0088;
+  border-color: #ff0088;
+}
+
+#nextButton.show {
+  opacity: 1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+  <div id="text"></div>
+</div>
+
+<script>
+
+const text = `
+I got a gig in the Port Arthur Gaol a fair bit back now. I’m not the most employable man around, but I knew they’d be too desperate for applicants to care.
+I had to tell the kids little ghost stories, make me eyes go all wide, really freak em out, give their folks their money's worth. There was this room, no bigger than a phone booth, right off this room that was no bigger than, say, two phone booths. These little rooms, they had these really heavy ironised doors there, I mean, even for a prison door that shit was heavy. 
+Anyway, and this is what I told the kiddos. As a form of punishment if a convict was misbehaving they'd chuck him in the furthest room, keep it real dark, not let any daylight in for about a week or so. Really let the bastard loose track of everything. If they’d bring him a meal, they’d shut at least one door. I’m telling ya, no light whatsoever.
+The blokes took to ripping buttons off their uniforms, throwing it up into the dark, listening to it bounce around on the walls, then getting down and searching the floors for it.
+Over and over. Fucken tedious ordeal.
+I get 'em tho.
+Anything to stay sane.
+`;
+
+const finalLines = [
+  "The kids right, Tyler.",
+  "You’ll be okay."
+];
+
+const SPEED = {
+  char: 42,        // slower than Jack
+  pause: 260,      // stronger sentence pause
+  finishHold: 3200 // longer emotional linger
+};
+
+const wrapper = document.getElementById("wrapper");
+const textEl = document.getElementById("text");
+
+let i = 0;
+
+/* TYPEWRITER */
+function type() {
+  if (i < text.length) {
+
+    const char = text[i];
+    textEl.innerHTML = text.slice(0, i) + "<span>|</span>";
+    i++;
+
+    let delay = SPEED.char;
+
+    if (char === "." || char === "!" || char === "?") {
+      delay = SPEED.pause;
+    }
+
+    setTimeout(type, delay);
+
+  } else {
+    textEl.innerHTML = text;
+
+    // 🔥 extra time so reader finishes properly
+    setTimeout(transition, SPEED.finishHold);
+  }
+}
+
+/* FINAL TRANSITION */
+function transition() {
+
+  wrapper.innerHTML = `
+    <div class="final">
+      <div class="finalLine" id="l1">${finalLines[0]}</div>
+      <div class="finalLine" id="l2">${finalLines[1]}</div>
+      <button id="nextButton">CONTINUE</button>
+    </div>
+  `;
+
+  const l1 = document.getElementById("l1");
+  const l2 = document.getElementById("l2");
+  const btn = document.getElementById("nextButton");
+
+  setTimeout(() => l1.classList.add("show"), 500);
+  setTimeout(() => l2.classList.add("show"), 1600);
+  setTimeout(() => btn.classList.add("show"), 3000);
+
+  btn.onclick = () => {
+    window.location.href = "page2.html";
+  };
+}
+
+type();
+
+</script>
+
+</body>
+</html>
