@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peanut Butter Room</title>
+
+<!-- Context Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+<!-- Dialogue Font -->
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin: 0;
+    padding: 60px 20px;
+    background: white;
+    color: #111;
+}
+
+/* =========================
+   CONTEXT PARAGRAPH
+   ========================= */
+
+.context {
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 100px auto;
+
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+/* =========================
+   CHAT AREA
+   ========================= */
+
+.chat {
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.6rem;
+    line-height: 1.7;
+}
+
+/* =========================
+   MESSAGE STYLING
+   ========================= */
+
+.message {
+    opacity: 0;
+    margin: 40px 0;
+    animation: appear 1s forwards;
+}
+
+/* Tyler */
+
+.left {
+    text-align: left;
+    margin-right: 25%;
+}
+
+/* Reader */
+
+.right {
+    text-align: right;
+    margin-left: 25%;
+}
+
+/* =========================
+   APPEARANCE TIMING
+   Edit delays as needed
+   ========================= */
+
+.m1 { animation-delay: 2s; }
+.m2 { animation-delay: 4s; }
+.m3 { animation-delay: 6s; }
+.m4 { animation-delay: 8s; }
+.m5 { animation-delay: 10s; }
+.m6 { animation-delay: 12s; }
+.m7 { animation-delay: 14s; }
+.m8 { animation-delay: 16s; }
+
+/* =========================
+   BACK LINK
+   ========================= */
+
+.back {
+    display: block;
+    text-align: center;
+    margin-top: 100px;
+
+    font-family: 'Bungee', sans-serif;
+    font-size: 0.85rem;
+
+    color: #111;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+
+.back:hover {
+    color: #ff0088;
+    opacity: 1;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- =====================================
+         CONTEXT PARAGRAPH
+         Replace this text with your own
+         ===================================== -->
+
+    <div class="context">
+        YOUR CONTEXT PARAGRAPH GOES HERE.
+
+        THIS CAN BE ONE SENTENCE OR MULTIPLE
+        LINES OF SETUP BEFORE THE CONVERSATION
+        BEGINS.
+    </div>
+
+    <!-- =====================================
+         CONVERSATION
+         LEFT = TYLER
+         RIGHT = READER
+         Replace text freely
+         ===================================== -->
+
+    <div class="chat">
+
+        <div class="message left m1">
+            Oi, kid. You ever lost something you love?
+        </div>
+
+        <div class="message right m2">
+            Reader's response goes here.
+        </div>
+
+        <div class="message left m3">
+            Tyler's next line goes here.
+        </div>
+
+        <div class="message right m4">
+            Reader's next response goes here.
+        </div>
+
+        <div class="message left m5">
+            Continue the conversation...
+        </div>
+
+        <div class="message right m6">
+            Add as many messages as you need.
+        </div>
+
+        <div class="message left m7">
+            You can also place links in dialogue.
+        </div>
+
+        <div class="message right m8">
+            Example: "Where do I go next?"
+        </div>
+
+    </div>
+
+    <!-- =====================================
+         BACK BUTTON
+         ===================================== -->
+
+    <a class="back" href="tyler.html">← Back</a>
+
+</body>
+</html>

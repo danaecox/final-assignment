@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Media Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      font-family: "Crimson Text", serif;
+      color: #111;
+      overflow: hidden;
+    }
+
+    #wrapper {
+      width: 68%;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #text {
+      font-size: 1.05rem;
+      line-height: 1.95;
+      white-space: pre-wrap;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 0.5ch;
+      animation: blink 1s infinite;
+    }
+
+    a {
+      color: #111;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: 0.25s;
+    }
+
+    a:hover {
+      color: #ff0088;
+      border-color: #ff0088;
+    }
+
+    #nextButton {
+      margin-top: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      font-family: "Bungee", sans-serif;
+      color: #111;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    #nextButton.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #nextButton:hover {
+      color: #ff0088;
+      border-color: #ff0088;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <div id="text"></div>
+  </div>
+
+  <script>
+
+    const hasVisitedFutile = localStorage.getItem("visitedFutile");
+
+    const firstVisitParagraphs = [
+`When I lived at home I’d punch the walls. It’s probably still there, who knows dad mighta patched it up by now. I get mad sometimes. I dunno. 
+I took a media class in grade ten or something, thought it would be a bit of a piss of a class.
+Just watching movies.
+We were learning about learned social behaviour through film. 
+The teacher said “What do teenage boys do when they’re angry?” None of us said anything. We didn’t really know if it was a question we were supposed to answer. She looked around the room real slowly, I wanted to say something but I had nothing.
+She spun her body around and threw her fist into the felted wall behind her.
+Kinda weird watching an older lady do that.`,
+    ];
+
+    const returnVisitParagraphs = [
+`That same teacher once kept me back after class to tell me that I make a real ass of myself sometimes for the sake of causing a distraction. Told her she’s probably not allowed to use that sorta language with me, told her it’s not my fault that the other kids get distracted so easily. Her face didn’t move an inch as I was talkin back to her. I reckon she was probably my favourite teacher. Told me I’ve used far worse language in her classroom, told me it’s not the other kids I’m tryna distract.`,
+`As I was leaving the room, strap of my crumpler in hand she called out to me, not looking away from the computer on her desk. “Jack,” She says “Wise the fuck up.”`,
+`I close my eyes and let my head bounce gently against the window of the door. The beat of the wheels grinding along the tracks matches the tempo of her words.`,
+`Wise the fuck up. I was never in love.`
+    ];
+
+    const paragraphs = hasVisitedFutile ? returnVisitParagraphs : firstVisitParagraphs;
+
+    const wrapper = document.getElementById("wrapper");
+    const textElement = document.getElementById("text");
+
+    let paraIndex = 0;
+    let charIndex = 0;
+    let displayed = "";
+
+    const nextButton = document.createElement("a");
+    nextButton.id = "nextButton";
+    nextButton.textContent = "continue";
+    nextButton.href = "instagram1.html";
+
+    function render() {
+      textElement.innerHTML =
+        displayed + '<span class="cursor">|</span>';
+    }
+
+    function type() {
+
+      const current = paragraphs[paraIndex];
+
+      if (charIndex < current.length) {
+
+        displayed += current[charIndex];
+        charIndex++;
+
+        render();
+
+        setTimeout(type, current[charIndex] === "." ? 180 : 32);
+
+      } else {
+
+        displayed += "\n\n";
+
+        paraIndex++;
+        charIndex = 0;
+
+        if (paraIndex < paragraphs.length) {
+          setTimeout(type, 300);
+        } else {
+          textElement.innerHTML = displayed;
+
+          wrapper.appendChild(nextButton);
+          setTimeout(() => nextButton.classList.add("show"), 200);
+        }
+      }
+    }
+
+    type();
+
+  </script>
+
+</body>
+
+</html>

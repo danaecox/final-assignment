@@ -1,39 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Page 2</title>
+
+  <!-- Crimson Text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Bungee -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       background: white;
-      font-family: Arial, sans-serif;
+
+      font-family: "Crimson Text", serif;
+      font-weight: 400;
+      font-style: normal;
+
+      color: #111;
+      overflow: hidden;
     }
 
     #text {
-      width: 65%;
-      max-width: 800px;
-      font-size: 1rem;
-      font-weight: normal;
-      line-height: 1.8;
-      color: #111;
+      width: 68%;
+      max-width: 760px;
+      font-size: 1.05rem;
+      line-height: 1.95;
+      letter-spacing: 0.01em;
       white-space: pre-wrap;
+
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
     }
 
     a {
       color: #111;
       text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s ease, border-color 0.25s ease;
     }
 
     a:hover {
       color: #ff0088;
+      border-color: #ff0088;
+    }
+
+    .sadboys-link {
+      font-family: "Bungee", sans-serif;
+      font-size: inherit;
+      font-weight: normal;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 0.5ch;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -43,31 +91,53 @@
   <div id="text"></div>
 
   <script>
-    const paragraph = `It's something close to 11 in the morning on a Tuesday. It's sunny and it doesn't matter what time of year it is. The number 19 tram is slowly passing through the outskirting suburbs of the CBD. You have somewhere to be, but it's not urgent.
+    const paragraph = `It's something close to 11 in the morning on a Tuesday.
+It's sunny and it doesn't matter what time of year it is.
 
-You're alone in a four seater by the doors. The tram is scarcely populated, maybe half a dozen passengers total. Among these passengers are three sad boys, each draped hopelessly around the furniture of the tram.
+The number 19 tram is slowly passing through the outskirting suburbs of the CBD.
+You have somewhere to be, but it's not urgent.
+
+You're alone in a four seater by the doors.
+The tram is scarcely populated, maybe half a dozen passengers total.
+
+Among these passengers are three sad boys, each draped hopelessly around the furniture of the tram.
 
 You have nothing to do but watch them.`;
 
     const textElement = document.getElementById("text");
 
     let index = 0;
-    let currentText = "";
+    let displayed = "";
+
+    function renderText() {
+
+      const linked = displayed.replace(
+        /sad boys/g,
+        '<a class="sadboys-link" href="sadboys.html">sad boys</a>'
+      );
+
+      textElement.innerHTML = linked + '<span class="cursor">|</span>';
+    }
 
     function typeText() {
+
       if (index < paragraph.length) {
 
-        currentText += paragraph[index];
-
-        const linkedText = currentText.replace(
-          "sad boys",
-          '<a href="page2.html">sad boys</a>'
-        );
-
-        textElement.innerHTML = linkedText;
+        displayed += paragraph[index];
+        renderText();
 
         index++;
-        setTimeout(typeText, 35);
+
+        const speed = paragraph[index] === "." ? 180 : 32;
+
+        setTimeout(typeText, speed);
+
+      } else {
+
+        textElement.innerHTML = displayed.replace(
+          /sad boys/g,
+          '<a class="sadboys-link" href="page2.html">sad boys</a>'
+        );
       }
     }
 
@@ -75,4 +145,5 @@ You have nothing to do but watch them.`;
   </script>
 
 </body>
+
 </html>
