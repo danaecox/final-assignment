@@ -16,13 +16,13 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* WRAPPER (anchors button only) */
+/* WRAPPER */
 .wrapper {
   position: relative;
   display: inline-block;
 }
 
-/* PHONE (perfectly centered by body grid) */
+/* PHONE */
 .story {
   width: 320px;
   height: 580px;
@@ -126,7 +126,11 @@ body {
   font-weight: 900;
   font-size: 30px;
   line-height: 1.2;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+
+  text-shadow:
+    0 6px 25px rgba(0,0,0,0.75),
+    0 2px 10px rgba(0,0,0,0.4);
+
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -170,7 +174,7 @@ body {
   inset: 0;
 }
 
-/* CONTINUE BUTTON (outside, right side) */
+/* CONTINUE BUTTON (TEXT ONLY) */
 .continue-btn {
   position: absolute;
   left: calc(100% + 22px);
@@ -181,18 +185,17 @@ body {
   font-size: 14px;
   letter-spacing: 1px;
 
-  background: #111;
-  color: white;
-
-  padding: 14px 18px;
-  border-radius: 14px;
+  color: black;
+  background: none;
+  border: none;
+  padding: 0;
 
   cursor: pointer;
 
   opacity: 0;
   pointer-events: none;
 
-  transition: all 0.25s ease;
+  transition: opacity 0.2s ease;
   white-space: nowrap;
 }
 
@@ -244,7 +247,7 @@ body {
   </div>
 
   <!-- CONTINUE BUTTON -->
-  <div class="continue-btn" id="continueBtn" onclick="alert('Continue clicked!')">
+  <div class="continue-btn" id="continueBtn" onclick="window.location.href='media_room_2.html'">
     CONTINUE
   </div>
 
@@ -252,12 +255,12 @@ body {
 
 <script>
 const stories = [
-  { text: "It's so over bro🤣🤣🤣 who want me???", gradient: "linear-gradient(-45deg,#0f0f0f,#434343)" },
-  { text: "fuck my actual chud life", gradient: "linear-gradient(-45deg,#1d2b64,#f8cdda)" },
-  { text: "all women are the same", gradient: "linear-gradient(-45deg,#ff6a00,#ee0979)" },
-  { text: "I'm sorry no I don't mean that mb", gradient: "linear-gradient(-45deg,#232526,#414345)" },
-  { text: "ignore what I'm saying literally ignore everything I say all the time I'm actually crashing out so hard", gradient: "linear-gradient(-45deg,#3a1c71,#d76d77)" },
-  { text: "never fall in love", gradient: "linear-gradient(-45deg,#000000,#434343)" }
+  { text: "It's so over bro🤣🤣🤣 who want me???", gradient: "linear-gradient(-45deg,#ff0057,#ffbd00)" },
+  { text: "fuck my actual chud life", gradient: "linear-gradient(-45deg,#00c6ff,#0072ff)" },
+  { text: "all women are the same", gradient: "linear-gradient(-45deg,#f953c6,#b91d73)" },
+  { text: "I'm sorry no I don't mean that mb", gradient: "linear-gradient(-45deg,#00f5a0,#00d9f5)" },
+  { text: "ignore what I'm saying literally ignore everything I say all the time I'm actually crashing out so hard", gradient: "linear-gradient(-45deg,#f7971e,#ffd200)" },
+  { text: "never fall in love", gradient: "linear-gradient(-45deg,#8e2de2,#4a00e0)" }
 ];
 
 let index = 0;

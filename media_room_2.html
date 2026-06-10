@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Media Room 2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Crimson Text", serif;
+  background: white;
+  overflow: hidden;
+}
+
+/* WRAPPER */
+#wrapper {
+  width: 70%;
+  max-width: 760px;
+  text-align: left;
+}
+
+/* MAIN TEXT */
+#text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  transition: opacity 1.2s ease;
+}
+
+/* FINAL SCREEN */
+#finalScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+/* FINAL TEXT */
+#finalLine {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* CONTINUE BUTTON */
+#nextButton {
+  margin-top: 25px;
+  font-family: "Bungee", sans-serif;
+  font-size: 14px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.2s ease, color 0.2s ease;
+
+  color: black;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#nextButton.show {
+  opacity: 1;
+}
+
+/* HOVER STATE */
+#nextButton:hover {
+  transform: scale(1.08);
+  color: #ff0088;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+  <div id="text"></div>
+</div>
+
+<!-- FINAL SCREEN -->
+<div id="finalScreen">
+  <div id="finalLine">
+    Wise the fuck up, Jack.<br>
+    You were never in love.
+  </div>
+</div>
+
+<script>
+
+/* MAIN TEXT ONLY */
+const mainText = `That same teacher once kept me back after class to tell me that I make a real ass of myself sometimes for the sake of causing a distraction. Told her she’s probably not allowed to use that sorta language with me, told her it’s not my fault that the other kids get distracted so easily. Her face didn’t move an inch as I was talkin back to her. I reckon she was probably my favourite teacher. Told me I’ve used far worse language in her classroom, told me it’s not the other kids I’m tryna distract.
+
+As I was leaving the room, strap of my crumpler in hand she called out to me, not looking away from the computer on her desk. 
+“Jack,” She said “Wise the fuck up.”
+
+I close my eyes and let my head bounce gently against the window of the door. The beat of the wheels grinding along the tracks matches the tempo of her words.`;
+
+/* TYPEWRITER */
+const textEl = document.getElementById("text");
+
+let i = 0;
+
+function type() {
+  if (i < mainText.length) {
+    textEl.innerHTML = mainText.slice(0, i);
+    i++;
+    setTimeout(type, 18);
+  } else {
+    textEl.innerHTML = mainText;
+    setTimeout(transitionToFinal, 900);
+  }
+}
+
+/* TRANSITION */
+function transitionToFinal() {
+
+  textEl.style.opacity = "0";
+
+  const finalScreen = document.getElementById("finalScreen");
+
+  setTimeout(() => {
+    finalScreen.style.opacity = "1";
+    setTimeout(showButton, 1200);
+  }, 800);
+}
+
+/* BUTTON */
+function showButton() {
+
+  const btn = document.createElement("button");
+  btn.id = "nextButton";
+  btn.textContent = "continue";
+
+  btn.onclick = () => {
+    window.location.href = "page2.html";
+  };
+
+  document.getElementById("finalScreen").appendChild(btn);
+
+  setTimeout(() => {
+    btn.classList.add("show");
+  }, 200);
+}
+
+type();
+
+</script>
+
+</body>
+</html>
