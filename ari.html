@@ -14,20 +14,17 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
       background-color: white;
       font-family: 'Bungee', sans-serif;
       text-align: center;
-      padding-top: 50px;
     }
 
-    img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 25px;
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .line {
@@ -37,13 +34,11 @@
       width: 0;
     }
 
-    /* 🔥 BIG NAME LINE */
     .line1 {
       font-size: 3.5rem;
       animation: typing1 1.2s steps(20, end) forwards;
     }
 
-    /* normal text */
     .line2 {
       font-size: 1.8rem;
       margin-top: 15px;
@@ -81,14 +76,11 @@
 
     a:hover {
       color: #ff0088;
-      color: #;
     }
 
     .back {
-      margin-top: 35px;
+      margin-bottom: 35px;
       font-size: 0.85rem;
-      text-decoration: none;
-      color: #111;
       opacity: 0.8;
     }
 
@@ -101,14 +93,14 @@
 
 <body>
 
-  <img src="ari.jpg" alt="Ari">
+  <div class="content">
+    <div class="line line1">ARI, 28</div>
 
-  <div class="line line1">ARI, 28</div>
+    <div class="line line2">CAUSE OF HEARTBREAK:</div>
 
-  <div class="line line2">CAUSE OF HEARTBREAK:</div>
-
-  <div class="line line3">
-    <a href="daddy-issues.html">DADDY ISSUES</a>
+    <div class="line line3">
+      <a href="daddy-issues.html">DADDY ISSUES</a>
+    </div>
   </div>
 
   <a class="back" href="page2.html">← Back</a>

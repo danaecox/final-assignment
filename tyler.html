@@ -14,20 +14,20 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
       background-color: white;
       font-family: 'Bungee', sans-serif;
       text-align: center;
-      padding-top: 40px;
     }
 
-    img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 25px;
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      /* Adjust this number if you want the text slightly higher/lower */
+      transform: translateY(40px);
     }
 
     .line {
@@ -37,7 +37,7 @@
       width: 0;
     }
 
-    /* TYLER, 44 (big line) */
+    /* TYLER, 44 */
     .line1 {
       font-size: 3.5rem;
       animation: typing1 1.2s steps(20, end) forwards;
@@ -82,13 +82,11 @@
 
     a:hover {
       color: #ff0088;
-      
     }
 
     .back {
-      margin-top: 35px;
+      margin-bottom: 35px;
       font-size: 0.85rem;
-      text-decoration: none;
       color: #111;
       opacity: 0.8;
     }
@@ -102,14 +100,14 @@
 
 <body>
 
-  <img src="tyler.jpg" alt="Tyler">
+  <div class="content">
+    <div class="line line1">TYLER, 44</div>
 
-  <div class="line line1">TYLER, 44</div>
+    <div class="line line2">CAUSE OF HEARTBREAK:</div>
 
-  <div class="line line2">CAUSE OF HEARTBREAK:</div>
-
-  <div class="line line3">
-    <a href="peanut-butter.html">PEANUT BUTTER</a>
+    <div class="line line3">
+      <a href="peanut-butter.html">PEANUT BUTTER</a>
+    </div>
   </div>
 
   <a class="back" href="page2.html">← Back</a>

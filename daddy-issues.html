@@ -4,23 +4,34 @@
   <meta charset="UTF-8">
   <title>Daddy Issues</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       background: #f2f2f7;
       font-family: Arial, sans-serif;
+      height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
     }
 
+    /* CHAT AREA */
     .chat {
-      width: 100%;
-      max-width: 500px;
-      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+
+      /* 👇 restores your centered “feel” */
+      padding: 40px 20px 140px;
+
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 30px;
+
+      /* keeps content visually centered when few messages exist */
+      justify-content: flex-start;
     }
 
     .bubble {
@@ -46,73 +57,101 @@
       border-bottom-right-radius: 5px;
     }
 
-    /* 🔥 small button */
+    /* BOTTOM CONTROL BAR */
     .controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #f2f2f7;
+      padding: 12px 0 18px;
       display: flex;
-      justify-content: center;
-      margin-top: 15px;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid rgba(0,0,0,0.08);
     }
 
-    button {
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      border: none;
-      border-radius: 999px;
-      background: rgba(0, 122, 255, 0.15);
-      color: #007aff;
-      cursor: pointer;
+    .nav-btn,
+    .back {
+      font-family: 'Bungee', sans-serif;
+      font-size: 0.85rem;
+      color: #111;
+      text-decoration: none;
+      opacity: 0.8;
       transition: 0.2s;
     }
 
-    button:hover {
-      background: rgba(0, 122, 255, 0.25);
-    }
-
-    .back {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #555;
-      text-decoration: none;
-      display: block;
-    }
-
+    .nav-btn:hover,
     .back:hover {
-      color: black;
+      color: #ff0088;
+      opacity: 1;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="chat">
+  <div class="chat" id="chat">
 
-    <div class="bubble left">hey mum</div>
-    <div class="bubble right">Hello Darling. How are you?</div>
+    <div class="bubble left">Hey mum</div>
+    <div class="bubble right">Hello darling. How are you?</div>
     <div class="bubble left">ahh been better</div>
-    <div class="bubble left">just on the way home from work now</div>
+    <div class="bubble left">Just on the way home from work now</div>
     <div class="bubble right">Already? What's wrong? Are you unwell?</div>
-    <div class="bubble left">nah don't worry I'll be fine. I was just wondering something?</div>
-    <div class="bubble left">Well, you know how I've been having those head aches?</div>
-    <div class="bubble left">everythings okay, but I've just been thinking</div>
+    <div class="bubble left">No don't worry I'll be fine. I was just wondering something?</div>
+    <div class="bubble left">Everythings okay but I've just been thinking</div>
     <div class="bubble left">Do you ever wish you got to do things differently? Marry whoever you wanted whenever you wanted? Just done things according to yourself not Nani and Nana?</div>
+    <div class="bubble right">What are you talking about darling?</div>
+    <div class="bubble left">Did you always want kids?</div>
+    <div class="bubble right">Well, yes I think I always did. Why?</div>
+    <div class="bubble left">No I really want you to think about this</div>
+    <div class="bubble left">Did you actually want to be a mum or did you just do it because you felt you had to?</div>
+    <div class="bubble right">Ari darling, would you like me to call you?</div>
+    <div class="bubble left">No mum I'm ok I just really want you to think about it</div>
+    <div class="bubble right">Well alright then.</div>
+    <div class="bubble right">Yes. I suppose I always did. As a girl I always wanted something to care for. I couldn't think about being grown up without thinking of you.</div>
+    <div class="bubble left">Ok yeah</div>
+    <div class="bubble left">Thanks</div>
+    <div class="bubble left">Sorry if I worried you</div>
+    <div class="bubble right">Thats ok, is there something you need to tell me?</div>
+    <div class="bubble right">You know you can tell me any news you have, darling. I'll always support you.</div>
+    <div class="bubble left">Yeah I know. Thanks mum</div>
+    <div class="bubble left">I'm fine just curious</div>
+    <div class="bubble left">I'll call you later</div>
 
-    <div class="controls">
-      <button onclick="nextMessage()">tap</button>
-    </div>
+  </div>
 
+  <!-- FIXED CONTROLS -->
+  <div class="controls">
+    <a class="nav-btn" id="nextBtn" href="#" onclick="nextMessage(); return false;">NEXT</a>
     <a class="back" href="ari.html">← Back</a>
-
   </div>
 
   <script>
     const messages = document.querySelectorAll(".bubble");
+    const chat = document.getElementById("chat");
+    const nextBtn = document.getElementById("nextBtn");
+
     let index = 0;
+
+    function scrollToBottom() {
+      chat.scrollTop = chat.scrollHeight;
+    }
 
     function nextMessage() {
       if (index < messages.length) {
         messages[index].style.display = "block";
         index++;
+
+        // 👇 auto-scroll like real chat apps
+        setTimeout(scrollToBottom, 50);
+      }
+
+      if (index === messages.length) {
+        nextBtn.textContent = "CONTINUE";
+        nextBtn.onclick = null;
+        nextBtn.href = "arifinal.html"; // change this
       }
     }
   </script>
